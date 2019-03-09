@@ -35,35 +35,35 @@ class ZipPanel(QWidget,Ui_zippanel):
             QMessageBox.warning(self, "Packing failed", "Please select the 7z.exe path first!", QMessageBox.Ok)
             return
         elif len(self.serval_dict.keys())<=1:
-            QMessageBox.warning(self, "Packing failed", "请先打开有效的serval文件！", QMessageBox.Ok)
+            QMessageBox.warning(self, "Packing failed", "Please open the serval file first!", QMessageBox.Ok)
             return
         ZP = Ziputil(self.ziptool_Path, self.zip_Path)
         temp_path=os.path.splitext(self.zip_Path)[0]+"_folder"
-        self.txt_display += "正在复制文件，操作时间可能较长，请耐心等待"  + '\n'
+        self.txt_display += "Copying files, it may takes a long time, please wait."  + '\n'
         self.updatingTxtDisplay.emit()
         ls=write_folder_from_dict(temp_path,self.serval_dict)
         if len(ls)==0:
-            self.txt_display += "复制完成" + '\n'
+            self.txt_display += "Copying complete!" + '\n'
         else:
-            self.txt_display+="以下文件没有找到：\n"
+            self.txt_display+="The following files missing：\n"
             for item in ls:
                 self.txt_display+=item
                 self.txt_display+='\n'
         self.updatingTxtDisplay.emit()
-        self.txt_display += "正在执行压缩，操作时间可能较长，请耐心等待" + '\n'
+        self.txt_display += "Compressing files, it may takes a long time, please wait." + '\n'
         self.updatingTxtDisplay.emit()
         code = ZP.genzipfile(temp_path)
         if code==0:
-            self.txt_display += "压缩完成，文件已保存到："+self.zip_Path + '\n'
+            self.txt_display += "Compressing complete! Saved 7z file to："+self.zip_Path + '\n'
             self.updatingTxtDisplay.emit()
         else:
-            self.txt_display += "压缩出错，请确保7z.exe正常工作" +  '\n'
+            self.txt_display += "Compressing failed! Please make sure 7z.exe works as expected." +  '\n'
             self.updatingTxtDisplay.emit()
 
     def updateTxtDisplay(self):
         self.txtOut.setPlainText(self.txt_display)
     def select_serval(self):
-        file_path_diag = QFileDialog.getOpenFileName(self, "打开文件", "C:/Users/",
+        file_path_diag = QFileDialog.getOpenFileName(self, "Open File", "C:/Users/",
                                                      "serval files (*.serval);;all files(*.*)")
         file_path = file_path_diag[0]
         print(file_path)
@@ -71,15 +71,15 @@ class ZipPanel(QWidget,Ui_zippanel):
             with open(file_path, encoding='utf-8') as f:
                 file_read = f.read()
         except Exception as e:
-            QMessageBox.warning(self, "打开文件失败", "无法打开文件:" + file_path, QMessageBox.Ok)
+            QMessageBox.warning(self, "Opening File Failed", "Cannot open the file:" + file_path, QMessageBox.Ok)
             return False
         serval_decrypt=decrypt(DEF.ENCRYPT_KEY,file_read)
         if validateHeader(serval_decrypt)!=0:
-            QMessageBox.warning(self, "文件校验失败", "以下文件不是合法的serval文件:" + file_path, QMessageBox.Ok)
+            QMessageBox.warning(self, "Validation Failed", "Serval file illegal:" + file_path, QMessageBox.Ok)
             return False
         self.serval_dict=load_serval(decrypt(DEF.ENCRYPT_KEY,file_read))
-        self.txt_display+="已打开serval文件："+file_path+'\n'
-        self.txt_display += "将打包以下文件：" +'\n'
+        self.txt_display+="Serval file opened："+file_path+'\n'
+        self.txt_display += "Compressing the following files：" +'\n'
         for key in self.serval_dict.keys():
             if key != 'label_line':
                 path = self.serval_dict[key]['path']
@@ -88,12 +88,12 @@ class ZipPanel(QWidget,Ui_zippanel):
         self.updatingTxtDisplay.emit()
         return True
     def select_zip(self):
-        file_path_diag = QFileDialog.getOpenFileName(self, "打开文件", "C:/Users/",
+        file_path_diag = QFileDialog.getOpenFileName(self, "Open File", "C:/Users/",
                                                      "exe files (*.exe);;all files(*.*)")
         file_path = file_path_diag[0]
         if file_path!="":
             self.ziptool_Path=file_path
-            self.txt_display+="将使用以下位置的7z工具："+file_path+'\n'
+            self.txt_display+="Using the following 7z.exe file："+file_path+'\n'
             self.updatingTxtDisplay.emit()
 
 

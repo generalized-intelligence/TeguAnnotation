@@ -42,10 +42,10 @@ class Ui_start(object):
 
     def retranslateUi(self, start):
         _translate = QtCore.QCoreApplication.translate
-        start.setWindowTitle(_translate("start", "Form"))
-        self.boxFile.setTitle(_translate("start", "新项目"))
-        self.button_new.setText(_translate("start", "新建项目"))
-        self.button_open.setText(_translate("start", "打开项目文件"))
-        self.button_pack.setText(_translate("start", "打包"))
+        start.setWindowTitle(_translate("start", "Annotation panel"))
+        self.boxFile.setTitle(_translate("start", "New project"))
+        self.button_new.setText(_translate("start", "Create project"))
+        self.button_open.setText(_translate("start", "Open project file"))
+        self.button_pack.setText(_translate("start", "Pack project"))
 
 

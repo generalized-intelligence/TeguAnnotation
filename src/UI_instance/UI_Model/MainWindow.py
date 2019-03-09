@@ -64,7 +64,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Tegu Image Annotator"))
         self.actionHelp.setText(_translate("MainWindow", "Help"))
         self.actionHelp.setShortcut(_translate("MainWindow", "F1"))
 

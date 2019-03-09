@@ -120,16 +120,16 @@ class Ui_config(object):
 
     def retranslateUi(self, config):
         _translate = QtCore.QCoreApplication.translate
-        config.setWindowTitle(_translate("config", "Form"))
-        self.label.setText(_translate("config", "新建项目名称"))
-        self.label_3.setText(_translate("config", "当前已选定图片路径"))
-        self.lblstatus.setText(_translate("config", "当前状态：尚未选择图片"))
-        self.btnAdd.setText(_translate("config", "添加图片路径"))
-        self.btnRefresh.setText(_translate("config", "刷新图片"))
-        self.btnDelPath.setText(_translate("config", " 删除当前路径 "))
-        self.btnLabelDel.setText(_translate("config", "删除标签"))
-        self.btnLabelAdd.setText(_translate("config", "添加标签"))
-        self.btnStart.setText(_translate("config", "开始标注"))
-        self.returnBtn.setText(_translate("config", "返回主页"))
+        config.setWindowTitle(_translate("config", "Config Panel"))
+        self.label.setText(_translate("config", "New project name"))
+        self.label_3.setText(_translate("config", "Picture paths selected"))
+        self.lblstatus.setText(_translate("config", "Current status: picture not selected"))
+        self.btnAdd.setText(_translate("config", "Add picture path"))
+        self.btnRefresh.setText(_translate("config", "Refresh pictures"))
+        self.btnDelPath.setText(_translate("config", " Delete current path "))
+        self.btnLabelDel.setText(_translate("config", "Delete labels"))
+        self.btnLabelAdd.setText(_translate("config", "Add label"))
+        self.btnStart.setText(_translate("config", "Start annotation"))
+        self.returnBtn.setText(_translate("config", "Return"))
 
 from UI_instance.UI_Model.ActionList import ActionList
