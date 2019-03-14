@@ -18,6 +18,8 @@ pip3 install -r requirements.txt
 ``` sh
 python3 main.py
 ```
+## Release version
+You can directly use a release version here [release](https://github.com/generalized-intelligence/TeguAnnotation/releases/tag/v1.0.0beta1)
 
 ## File Structure
 * src/:Source Code
@@ -90,6 +92,10 @@ pip3 install -r requirements.txt
 ``` sh
 python3 main.py
 ```
+## 发布版本
+您也可以直接使用打包好的发布版本。
+
+[发布](https://github.com/generalized-intelligence/TeguAnnotation/releases/tag/v1.0.0beta1)
 
 ## 文件结构
 
