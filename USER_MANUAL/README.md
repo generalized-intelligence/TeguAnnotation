@@ -1,10 +1,10 @@
 ![Tegu Logo](https://s2.ax1x.com/2019/01/30/kl6rzF.jpg)
-# GIIA-Python
-## Generalized Intelligence Image Annotator based on PyQt
-## 泛化智能图像标注工具（Python版）用户手册
+# TIA-Python
+## Tegu Image Annotator based on PyQt
+## Tegu图像标注工具（Python版）用户手册
 
 ### 概述
-泛化智能图像标注工具（ Generalized Intelligence Image Annotator，以下简称GIIA）是TeguCV 的一个配套工具，用于为计算机视觉方向的深度学习模型提供标注数据。该工具能以可视化的形式，帮助用户方便快捷地为深度学习模型准备经过标注的图像数据。该工具目前已在 Windows 10 1803 x64 平台测试通过，，理论上可以直接在Linux和macOS平台上运行（未经测试）。
+Tegu图像标注工具（Tegu Image Annotator，以下简称TIA）是TeguCV 的一个配套工具，用于为计算机视觉方向的深度学习模型提供标注数据。该工具能以可视化的形式，帮助用户方便快捷地为深度学习模型准备经过标注的图像数据。该工具目前已在 Windows 10 1803 x64 平台测试通过，理论上可以直接在Linux和macOS平台上运行（未经测试）。
 
 本软件要求屏幕分辨率不小于 1024X768 。
 ---
