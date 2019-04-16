@@ -4,23 +4,29 @@ from config import defaults as DEF
 ZIP_PASS=DEF.ZIP_PASS
 
 import os
+import zipfile
 class Ziputil():
     def __init__(self, ziptoolpath:str, zipfilepath:str):
         self.ziptoolpath=ziptoolpath
         self.zipfilepath=zipfilepath
         self.password=ZIP_PASS
+        self.using7z=True
+        if len(self.ziptoolpath)==0:
+            self.using7z=False
     def getzipfile(self):
-        with open('blankfile','w') as f:
-            f.write('\n')
-        command=' a '+self.zipfilepath+' '+os.getcwd()+'\\blankfile -p'+ZIP_PASS
-        print(self.ziptoolpath+command)
-        code=os.system(self.ziptoolpath+command)
-        return code
+        if self.using7z:
+            with open('blankfile','w') as f:
+                f.write('\n')
+            command=' a '+self.zipfilepath+' '+os.getcwd()+'\\blankfile -p'+ZIP_PASS
+            print(self.ziptoolpath+command)
+            code=os.system(self.ziptoolpath+command)
+            return code
     def genzipfile(self,folder_path:str):
-        command=" a -t7z -scsUTF-8 "+self.zipfilepath+" "+folder_path+"\\* -p"+ZIP_PASS
-        print(self.ziptoolpath+command)
-        code = os.system(self.ziptoolpath + command)
-        return code
+        if self.using7z:
+            command=" a -t7z -scsUTF-8 "+self.zipfilepath+" "+folder_path+"\\* -p"+ZIP_PASS
+            print(self.ziptoolpath+command)
+            code = os.system(self.ziptoolpath + command)
+            return code
 
 
 def load_serval(str_serval:str): #load a serval file
