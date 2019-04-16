@@ -2,6 +2,7 @@ import shutil
 from model.EncryptTools import *
 from config import defaults as DEF
 ZIP_PASS=DEF.ZIP_PASS
+
 import os
 class Ziputil():
     def __init__(self, ziptoolpath:str, zipfilepath:str):
@@ -22,7 +23,7 @@ class Ziputil():
         return code
 
 
-def load_serval(str_serval:str):
+def load_serval(str_serval:str): #load a serval file
     lines=str_serval.split('\n')
     serval_dict={}
     for line in lines:
@@ -33,7 +34,7 @@ def load_serval(str_serval:str):
             continue
         line_split=line.split(':')
         line_path_full=':'.join([line_split[0],line_split[1]])
-        print(line_path_full)
+        print("load:",line_path_full)
         line_path_full_split=line_path_full.split('/')
         path_folder='/'.join(line_path_full_split[:-1])
         file_name=line_path_full_split[-1:][0]
@@ -43,7 +44,27 @@ def load_serval(str_serval:str):
     return serval_dict
 def get_path_folder(path):
     path_folder = '_'.join(path.split('/'))
-    return path_folder.replace(':','')
+    return path_folder.replace(':','').replace(' ','-')
+def split_serval(serval_dict:dict):
+    filename_dic={}
+    for key in serval_dict.keys():
+        if key!='label_line':
+            path = serval_dict[key]['path']
+            anno = serval_dict[key]['anno']
+            str_line = key + ':' + anno
+            path_filename=get_path_folder(path)
+            if path_filename not in filename_dic.keys():
+                filename_dic[path_filename]=[]
+            filename_dic[path_filename].append(str_line)
+    filename_serval_dic={}
+    for key in filename_dic.keys():
+        list_to_write=filename_dic[key]
+        serval_new='\n'.join(list_to_write)
+        serval_new+='\n'
+        serval_new_header=addHeader(serval_new)
+        filename_serval_dic[key]=serval_new_header
+    return filename_serval_dic
+
 def regenerate_serval(serval_dict:dict):
     list_to_write=[]
     list_to_write.append(serval_dict['label_line'])
@@ -81,21 +102,29 @@ def write_folder_from_dict(path:str, serval_dict:dict):
 
 
 if __name__=="__main__":
-    with open('zip.serval',encoding='utf-8') as f:
+    import os
+    print(os.getcwd())
+    with open('zip_decryped_demo.serval',encoding='utf-8') as f:
         str_serval=f.read()
     #with open('decrypt.serval','w',encoding='utf-8') as f_write:
     #    f_write.write(decrypt(ENCRYPT_KEY,str_serval))
-    serval_dict=load_serval(decrypt(DEF.ENCRYPT_KEY,str_serval))
+    serval_dict=load_serval(str_serval)
+    split_dict=split_serval(serval_dict)
+
+    for key in split_dict.keys():
+        print(key)
+        print(split_dict[key])
+
     #print(serval_dict)
     #print(serval_dict['label_line'])
-    import os
-    ls=write_folder_from_dict(os.getcwd(), serval_dict)
-    print(ls)
     #import os
-    os.chdir('../')
-    print(os.getcwd())
+    #ls=write_folder_from_dict(os.getcwd(), serval_dict)
+    #print(ls)
+    #import os
+    #os.chdir('../')
+    #print(os.getcwd())
 
-    ZP=Ziputil(os.getcwd()+'\\7zfiles\\7z.exe',os.getcwd()+'\\zipdemo.7z')
-    code=ZP.genzipfile('"'+os.getcwd()+'\\writing_path"')
-    print(code)
+    #ZP=Ziputil(os.getcwd()+'\\7zfiles\\7z.exe',os.getcwd()+'\\zipdemo.7z')
+    #code=ZP.genzipfile('"'+os.getcwd()+'\\writing_path"')
+    #print(code)
 
