@@ -54,6 +54,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="btnCut">
+        <property name="text">
+         <string>Cut Serval File into Subfiles</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btnSave">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">

@@ -10,7 +10,17 @@ class ZipPanel(QWidget,Ui_zippanel):
         super(ZipPanel, self).__init__(parent)
         self.setupUi(self)
         self.serval_dict={}
-        self.txt_display="This function requires 7z, please show the correct path of 7z.exe\n"
+        self.using7z=True
+        import platform
+        if platform.architecture()[1].lower().startswith("windows"):
+            self.txt_display="This function requires 7z, please show the correct path of 7z.exe.\n"
+            self.txt_display+="Or you can choose to use internal zipfile tool instead.\n"
+        else:
+            self.txt_display = "You are not using Windows, you can only use internal zipfile tool.\n"
+            self.btnZipTool.setEnabled(False)
+            self.checkUsing7z.setChecked(True)
+            self.checkUsing7z.setEnabled(False)
+            self.using7z=False
         self.ziptool_Path=""
         self.zip_Path=""
         self.btnServal.clicked.connect(self.select_serval)
@@ -18,7 +28,40 @@ class ZipPanel(QWidget,Ui_zippanel):
         self.updatingTxtDisplay.connect(self.updateTxtDisplay)
         self.btnSave.clicked.connect(self.select_save)
         self.btnStart.clicked.connect(self.zip_pack)
+        self.btnCut.clicked.connect(self.cut_serval)
+        self.checkUsing7z.stateChanged.connect(self.using_ziptool_checked)
         self.updatingTxtDisplay.emit()
+    def using_ziptool_checked(self):
+        using_ziptool=self.checkUsing7z.checkState()
+        print(using_ziptool)
+        if using_ziptool!=0:
+            self.txt_display += "Using internal zipfile tool instead now.\n"
+            self.updatingTxtDisplay.emit()
+            self.using7z=False
+            self.btnZipTool.setEnabled(False)
+        else:
+            self.txt_display += "Using 7z.exe now.\n"
+            self.updatingTxtDisplay.emit()
+            self.using7z = True
+            self.btnZipTool.setEnabled(True)
+    def cut_serval(self):
+        if len(self.serval_dict)==0:
+            QMessageBox.warning(self, "Cutting failed", "Please Select the Save Path First!", QMessageBox.Ok)
+            return
+        save_path = QFileDialog.getExistingDirectory(self,"Select Path to Save Serval Files",os.getcwd())
+        if save_path != "":
+            filename_serval_dict=split_serval(self.serval_dict)
+            try:
+                for k,v in filename_serval_dict.items():
+                    with open(save_path+'/'+k+'.serval','w',encoding='utf-8') as f:
+                        f.write(v)
+            except Exception as e:
+                print(str(e))
+                QMessageBox.warning(self, "Cutting failed", "Please Make Sure Your Save Path is Available!", QMessageBox.Ok)
+                return
+        QMessageBox.information(self,"Saving Succeed","Serval Files Saved Here:"+save_path,QMessageBox.Ok)
+        return
+
     def select_save(self):
         file_path_diag = QFileDialog.getSaveFileName(self, "Save File", "C:/Users/",
                                                      "7z files (*.7z);;all files(*.*)")

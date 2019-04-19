@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_zippanel(object):
     def setupUi(self, zippanel):
         zippanel.setObjectName("zippanel")
-        zippanel.resize(796, 611)
+        zippanel.resize(1016, 684)
         self.verticalLayout = QtWidgets.QVBoxLayout(zippanel)
         self.verticalLayout.setObjectName("verticalLayout")
         self.groupBtn = QtWidgets.QGroupBox(zippanel)
@@ -34,6 +34,12 @@ class Ui_zippanel(object):
         self.btnZipTool.setSizePolicy(sizePolicy)
         self.btnZipTool.setObjectName("btnZipTool")
         self.horizontalLayout.addWidget(self.btnZipTool)
+        self.checkUsing7z = QtWidgets.QCheckBox(self.groupBtn)
+        self.checkUsing7z.setObjectName("checkUsing7z")
+        self.horizontalLayout.addWidget(self.checkUsing7z)
+        self.btnCut = QtWidgets.QPushButton(self.groupBtn)
+        self.btnCut.setObjectName("btnCut")
+        self.horizontalLayout.addWidget(self.btnCut)
         self.btnSave = QtWidgets.QPushButton(self.groupBtn)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -64,8 +70,10 @@ class Ui_zippanel(object):
         _translate = QtCore.QCoreApplication.translate
         zippanel.setWindowTitle(_translate("zippanel", "zip"))
         self.groupBtn.setTitle(_translate("zippanel", "打包上传"))
-        self.btnServal.setText(_translate("zippanel", "选择Serval文件"))
-        self.btnZipTool.setText(_translate("zippanel", "选择7z程序位置"))
-        self.btnSave.setText(_translate("zippanel", "选择保存位置"))
-        self.btnStart.setText(_translate("zippanel", "开始打包"))
+        self.btnServal.setText(_translate("zippanel", "Select Serval File"))
+        self.btnZipTool.setText(_translate("zippanel", "Select 7z.exe File"))
+        self.checkUsing7z.setText(_translate("zippanel", "Use Internal Zipfile tool instead"))
+        self.btnCut.setText(_translate("zippanel", "Cut Serval File into Subfiles"))
+        self.btnSave.setText(_translate("zippanel", "Select Save Path"))
+        self.btnStart.setText(_translate("zippanel", "Start Packing"))
 
