@@ -13,21 +13,47 @@ class Ziputil():
         self.using7z=True
         if len(self.ziptoolpath)==0:
             self.using7z=False
-    def getzipfile(self):
-        if self.using7z:
-            with open('blankfile','w') as f:
+    def setpassword(self,password:str):
+        self.password=password
+    def getzipfile(self):#create a blank zip file
+        if self.using7z: #using outside 7z.exe
+            with open('blankfile','w') as f: #create a blankfile to compress
                 f.write('\n')
-            command=' a '+self.zipfilepath+' '+os.getcwd()+'\\blankfile -p'+ZIP_PASS
+            command=' a '+self.zipfilepath+' '+os.getcwd()+'\\blankfile'
+            if len(self.password)!=0:
+                command += ' -p'+self.password
             print(self.ziptoolpath+command)
             code=os.system(self.ziptoolpath+command)
             return code
+        else:#using zipfile pack, with no password
+            try:
+                azip = zipfile.ZipFile(self.zipfilepath, 'w')
+                azip.write('blankfile', compress_type=zipfile.ZIP_LZMA)
+                azip.close()
+                return 0
+            except Exception as e:
+                azip.close()
+                return str(e)
     def genzipfile(self,folder_path:str):
         if self.using7z:
             command=" a -t7z -scsUTF-8 "+self.zipfilepath+" "+folder_path+"\\* -p"+ZIP_PASS
             print(self.ziptoolpath+command)
             code = os.system(self.ziptoolpath + command)
             return code
-
+        else:
+            try:
+                azip = zipfile.ZipFile(self.zipfilepath, 'w')
+                for current_path, subfolders, filesname in os.walk(folder_path):
+                    print(current_path, subfolders, filesname)
+                    #  filesname是一个列表，我们需要里面的每个文件名和当前路径组合
+                    for file in filesname:
+                        # 将当前路径与当前路径下的文件名组合，就是当前文件的绝对路径
+                        azip.write(os.path.join(current_path, file))
+                azip.close()
+                return 0
+            except Exception as e:
+                azip.close()
+                return str(e)
 
 def load_serval(str_serval:str): #load a serval file
     lines=str_serval.split('\n')

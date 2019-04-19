@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>796</width>
-    <height>611</height>
+    <width>1016</width>
+    <height>684</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>选择Serval文件</string>
+         <string>Select Serval File</string>
         </property>
        </widget>
       </item>
@@ -42,7 +42,14 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>选择7z程序位置</string>
+         <string>Select 7z.exe File</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkUsing7z">
+        <property name="text">
+         <string>Use Internal Zipfile tool instead</string>
         </property>
        </widget>
       </item>
@@ -55,7 +62,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>选择保存位置</string>
+         <string>Select Save Path</string>
         </property>
        </widget>
       </item>
@@ -68,7 +75,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>开始打包</string>
+         <string>Start Packing</string>
         </property>
        </widget>
       </item>
