@@ -69,7 +69,7 @@ class Ui_zippanel(object):
     def retranslateUi(self, zippanel):
         _translate = QtCore.QCoreApplication.translate
         zippanel.setWindowTitle(_translate("zippanel", "zip"))
-        self.groupBtn.setTitle(_translate("zippanel", "打包上传"))
+        self.groupBtn.setTitle(_translate("zippanel", "Pack Upload"))
         self.btnServal.setText(_translate("zippanel", "Select Serval File"))
         self.btnZipTool.setText(_translate("zippanel", "Select 7z.exe File"))
         self.checkUsing7z.setText(_translate("zippanel", "Use Internal Zipfile tool instead"))
