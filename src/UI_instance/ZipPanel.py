@@ -74,7 +74,7 @@ class ZipPanel(QWidget,Ui_zippanel):
         if self.zip_Path=="":
             QMessageBox.warning(self, "Packing failed", "Please select the save path first!" , QMessageBox.Ok)
             return
-        elif self.ziptool_Path=="":
+        elif self.ziptool_Path=="" and self.using7z:
             QMessageBox.warning(self, "Packing failed", "Please select the 7z.exe path first!", QMessageBox.Ok)
             return
         elif len(self.serval_dict.keys())<=1:

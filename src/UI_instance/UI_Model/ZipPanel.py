@@ -72,8 +72,8 @@ class Ui_zippanel(object):
         self.groupBtn.setTitle(_translate("zippanel", "Pack Upload"))
         self.btnServal.setText(_translate("zippanel", "Select Serval File"))
         self.btnZipTool.setText(_translate("zippanel", "Select 7z.exe File"))
-        self.checkUsing7z.setText(_translate("zippanel", "Use Internal Zipfile tool instead"))
-        self.btnCut.setText(_translate("zippanel", "Cut Serval File into Subfiles"))
+        self.checkUsing7z.setText(_translate("zippanel", "Use Internal Zipfile Tool"))
+        self.btnCut.setText(_translate("zippanel", "Split Serval File"))
         self.btnSave.setText(_translate("zippanel", "Select Save Path"))
         self.btnStart.setText(_translate("zippanel", "Start Packing"))
 

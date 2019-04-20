@@ -33,6 +33,7 @@ class Ziputil():
                 return 0
             except Exception as e:
                 azip.close()
+                print(str(e))
                 return str(e)
     def genzipfile(self,folder_path:str):
         if self.using7z:
@@ -53,6 +54,7 @@ class Ziputil():
                 return 0
             except Exception as e:
                 azip.close()
+                print(str(e))
                 return str(e)
 
 def load_serval(str_serval:str): #load a serval file
